@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap em si-->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"
+    />
+
+    <!--Icones bootstrap-->
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" 
+    />
+
+    <!--Css com algumas utilidades-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utils.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+
+    <title>Alterar NE - Unblocker</title>
+</head>
+
+<body>
+
+    {% if method=='POST' %}
+    <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+        <div id="toast" class="toast {{ 'bg-danger' if response.error else 'bg-success'}} text-white" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="2000">
+            <div class="toast-header {{ 'bg-danger' if response.error else 'bg-success'}} text-white">
+                <strong class="me-auto">Aviso</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{response.data}}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <main class="d-flex justify-content-center align-items-center vw-100 h-100 position-absolute top-0 start-0">
+        <div class="d-flex flex-column w-75 h-100 justify-content-center overflow-auto">
+            <header class="d-flex justify-content-center">
+                <h1>Alterar NE <i class="bi bi-hdd-stack"></i></h1>
+            </header>
+            <div>
+                <form action="" method="post">
+                    
+                    <label for="description" class="form-label mt-1">Nome:</label>
+                    <input type="text" class="form-control" name="description" id="description" value="{{ ne_data['description'] }}"/>
+
+                    <label for="host" class="form-label mt-1">Host:</label>
+                    <input type="text" class="form-control" name="host" id="host" value="{{ ne_data['host'] }}" />
+                    
+                    <label for="username" class="form-label mt-1">Usuário:</label>
+                    <input type="text" class="form-control" name="username" id="username" value="{{ ne_data['username'] }}" />
+
+                    <label for="password" class="form-label mt-1">Senha:</label>
+                    <input type="password" class="form-control" name="password" id="password" value="{{ ne_data['password'] }}" />
+
+                    <label for="poolname" class="form-label mt-1">Nome da Pool:</label>
+                    <input type="text" class="form-control" name="poolname" id="poolname" value="{{ ne_data['poolname'] }}" />
+                    
+                    <label for="vendor" class="form-label mt-1">Vendor:</label>
+                    <select class="form-control" name="vendor" id="vendor">
+                        <option value="mikrotik" {{ "selected" if ne_data["vendor"] == "mikrotik" else "" }} >Mikrotik</option>
+                        <option value="huawei" {{ "selected" if ne_data["vendor"] == "huawei" else "" }}>Huawei</option>
+                    </select>
+                    
+
+                    <div class="d-flex justify-content-center w-auto mt-2">
+                        <input type="submit" value="Alterar" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="vstack gap-2 position-fixed bottom-0 end-0 me-2 mb-2" >
+
+            <!--Voltar-->
+            <a 
+                href="/ne" 
+                class="bg-primary text-white d-flex justify-content-center align-items-center rounded side-button"
+                title="Voltar"
+            >
+                <i class="bi bi-arrow-return-left fs-1 justify-content-center align-items-center"></i>
+            </a>
+
+            <!--Pagina Inicial-->
+            <a 
+                href="/" 
+                class="bg-primary text-white d-flex justify-content-center align-items-center rounded side-button"
+                title="Inicio"
+            >
+                <i class="bi bi-house fs-1" ></i>
+            </a>
+
+        </div>
+
+    </main>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"
+    ></script>
+
+    {% if method=='POST' %}
+    <script>
+        const t = document.getElementById("toast");
+        const toastB = bootstrap.Toast.getOrCreateInstance(t);
+        toastB.show()
+    </script>
+    {% endif %}
+
+</body>
+
+</html>

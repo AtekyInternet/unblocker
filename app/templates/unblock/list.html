@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap em si-->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"
+    />
+
+    <!--Icones bootstrap-->
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" 
+    />
+
+    <!--Css com algumas utilidades-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utils.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+
+    <title>Configurar Cliente - Unblocker</title>
+</head>
+
+<body>
+
+    <main class="d-flex justify-content-center align-items-center vw-100 h-100 position-absolute top-0 start-0">
+        <div class="d-flex flex-column w-750 h-100 justify-content-center overflow-auto">
+            <header class="d-flex justify-content-center">
+                <h1>Selecione o login:<i class="bi bi-unlock"></i></i></h1>
+            </header>
+            <div class="d-flex flex-column gap-2 flex-align-start">
+                {% for login in login_list %}
+                    <a class="btn btn-info" href="/unblock/{{contract}}/{{ login['id'] }}">{{ login['login'] }} - {{ login['id'] }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="vstack gap-2 position-fixed bottom-0 end-0 me-2 mb-2" >
+
+            <!--Voltar-->
+            <a 
+                href="/unblock" 
+                class="bg-primary text-white d-flex justify-content-center align-items-center rounded side-button"
+                title="Voltar"
+            >
+                <i class="bi bi-arrow-return-left fs-1 justify-content-center align-items-center"></i>
+            </a>
+            <!--Pagina Inicial-->
+            <a 
+                href="/" 
+                class="bg-primary text-white d-flex justify-content-center align-items-center rounded side-button"
+                title="Inicio"
+            >
+                <i class="bi bi-house fs-1" ></i>
+            </a>
+
+        </div>
+
+    </main>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"
+    ></script>
+
+    {% if method=='POST' %}
+    <script>
+        const t = document.getElementById("toast");
+        const toastB = bootstrap.Toast.getOrCreateInstance(t);
+        toastB.show()
+    </script>
+    {% endif %}
+
+</body>
+
+</html>

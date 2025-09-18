@@ -1,0 +1,8 @@
+paramiko
+cryptography
+Flask
+mysql-connector-python
+PyMySQL
+peewee
+python-dateutil
+librouteros

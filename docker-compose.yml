@@ -1,0 +1,43 @@
+services:
+        unblocker:
+                tty: true
+                build: ./app
+                ports:
+                        - 8888:8888
+                container_name: unblocker
+                env_file:
+                        - app/.env
+                image: alpine/unblocker:1.0
+                # command: >
+                #   sh -c  "service apache2 restart && sleep infinity"
+                networks:
+                        unblockernetwork:
+                                ipv4_address: 10.0.18.3
+
+
+        # regrastik_database:
+        #         image: mysql:5.7
+        #         container_name: regrastik_Database
+        #         command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER --explicit_defaults_for_timestamp
+        #         restart: always
+        #         environment:
+        #                 MYSQL_USER: $$$$$$$$4
+        #                 MYSQL_PASSWORD: $$$$$$$
+        #                 MYSQL_ROOT_PASSWORD: $$$$$$
+        #                 MYSQL_DATABASE: $$$$$$$
+                        
+        #         volumes:
+        #                 - ./database:/docker-entrypoint-initdb.d
+        #         ports:
+        #                 - "4005:3306"
+        #         networks:
+        #                 regrastiknetwork:
+        #                         ipv4_address: 10.0.18.3
+
+networks:
+ unblockernetwork:
+  driver: bridge
+  ipam:
+   config:
+    - subnet: 10.0.18.0/29
+      gateway: 10.0.18.1
