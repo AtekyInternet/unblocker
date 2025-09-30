@@ -20,7 +20,7 @@ def auth_guard(route):
                 return redirect('/')
         
         elif 'user_id' not in session and 'login' != first:
-            redirect('/login')
+            return redirect('/login')
             
                 
         return route(*args, **kwargs)
