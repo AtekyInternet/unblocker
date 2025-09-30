@@ -31,10 +31,10 @@ class ShellSSh:
 
     def send(self, buffer: str):
         self.bash.send((buffer + '\n').encode('ascii'))
-        time.sleep(0.1)
+        time.sleep(0.9)
 
         while not self.bash.recv_ready():
-            time.sleep(0.05)
+            time.sleep(0.9)
 
         result: bytes = b''
         recvd: bytes = self.bash.recv(ShellSSh.RECEIVE_SIZE)

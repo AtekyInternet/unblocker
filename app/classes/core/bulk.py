@@ -24,6 +24,7 @@ class AsyncBulk:
         router:VendorBase = vendor(ne['host'], ne['username'], Coder.decode(ne['password']))
         
         result = await asyncio.to_thread(router.add, ne['poolname'], ip_address, customer)
+
         return result
     
     @staticmethod
@@ -40,6 +41,7 @@ class AsyncBulk:
         router:VendorBase = vendor(ne['host'], ne['username'], Coder.decode(ne['password']))
         
         result = await asyncio.to_thread(router.get, ne['poolname'], ip_address)
+        print(result)
         return result
     
     @staticmethod
