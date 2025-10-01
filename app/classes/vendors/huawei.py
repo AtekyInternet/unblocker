@@ -109,6 +109,8 @@ class Huawei(VendorBase):
 
                 if response.error is False:
                     ssh.send('commit')
+                    ssh.send('run save')
+                    ssh.send('y')
 
         except Exception as err:
             return Response(
@@ -151,6 +153,10 @@ class Huawei(VendorBase):
                 if response.error is False:
 
                     ssh.send('commit')
+                    ssh.send('run save')
+                    ssh.send('y')
+
+
 
         except Exception as err:
             return Response(
