@@ -1,3 +1,6 @@
+from datetime import timezone, timedelta
+
+
 from peewee import DataError
 from peewee import IntegrityError
 from peewee import OperationalError
@@ -9,6 +12,8 @@ from classes.utils.types import Response
 from classes.db import Log
 from classes.db import User
 from classes.db import mysql_db
+
+gmt_minus_3 = timezone(timedelta(hours=-3))
 
 class LogOperations:
     def create(data):
