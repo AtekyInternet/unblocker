@@ -51,6 +51,8 @@ class LogOperations:
                         .join(User, on=(Log.user_id == User.id))\
                         .order_by(Log.datetime.desc())\
                         .dicts()
+                for log in log_list:
+                    log["datetime"] = log["datetime"].astimezone(gmt_minus_3)
 
             response.data = log_list
             response.error = False
@@ -85,6 +87,9 @@ class LogOperations:
                         .where(Log.datetime.between(start, end))\
                         .order_by(Log.datetime.desc())\
                         .dicts()
+                
+                for log in log_list:
+                    log["datetime"] = log["datetime"].astimezone(gmt_minus_3)
 
             response.data = log_list
             response.error = False
