@@ -49,6 +49,7 @@ class LogOperations:
             with mysql_db.atomic():
                 log_list = Log.select(Log, User.username)\
                         .join(User, on=(Log.user_id == User.id))\
+                        .order_by(Log.datetime.desc())\
                         .dicts()
 
             response.data = log_list
@@ -82,6 +83,7 @@ class LogOperations:
                 log_list = Log.select(Log, User.username)\
                         .join(User, on=(Log.user_id == User.id))\
                         .where(Log.datetime.between(start, end))\
+                        .order_by(Log.datetime.desc())\
                         .dicts()
 
             response.data = log_list
