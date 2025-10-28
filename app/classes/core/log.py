@@ -55,6 +55,7 @@ class LogOperations:
                 log_list = Log.select(Log, User.username)\
                         .join(User, on=(Log.user_id == User.id))\
                         .order_by(Log.datetime.desc())\
+                        .limit(100)\
                         .dicts()
                 for log in log_list:
                     log["datetime"] = log["datetime"].astimezone(gmt_minus_3)
