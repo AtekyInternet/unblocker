@@ -12,6 +12,9 @@ services:
                         - proxy_net
 
 
+networks:
+  proxy_net:
+    external: true
 
 # networks:
 #  unblockernetwork:
