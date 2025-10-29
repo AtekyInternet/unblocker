@@ -2,17 +2,14 @@ services:
         unblocker:
                 tty: true
                 build: ./app
-                ports:
-                        - 8888:8888
                 container_name: unblocker
                 env_file:
                         - app/.env
                 image: alpine/unblocker:1.0
                 # command: >
                 #   sh -c  "service apache2 restart && sleep infinity"
-                # networks:
-                #         unblockernetwork:
-                #                 ipv4_address: 10.0.18.3
+                networks:
+                        - proxy_net
 
 
 
